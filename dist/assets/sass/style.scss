@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=cyrillic-ext');
+@import './variables/variables.scss';
+@import './base.scss';
+
+@import './blocks/header/header.scss';
+@import './blocks/sidepanel/sidepanel.scss';
+@import './blocks/preview/preview.scss';
+@import './blocks/offer/offer.scss';
+@import './blocks/calculating/calculating.scss';
+@import './blocks/menu/menu.scss';
+@import './blocks/order/order.scss';
+@import './blocks/promotion/promotion.scss';
+@import './blocks/footer/footer.scss';
+@import './blocks/modal/modal.scss';

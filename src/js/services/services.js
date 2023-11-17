@@ -1,21 +1,45 @@
-const postData = async (url, data) => { // async делает синхронный код. Вместе с await. не блокирует код подобие синхронного кода
-    const result = await fetch(url, { //! fetch it ассинхронный код он не ждёт другой код. он создаст пустую переменную и дальше сразу return, будет error
-        method: "POST",
-        headers: {'Content-type': 'application/json'},
-        body: data
-    });
-    return result.json();
+const postData = async (url, data) => {
+  // async делает синхронный код. Вместе с await. не блокирует код подобие синхронного кода
+  const result = await fetch(url, {
+    //! fetch it ассинхронный код он не ждёт другой код. он создаст пустую переменную и дальше сразу return, будет error
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: data,
+  });
+  return await result.json();
 };
 
-async function getResource(url) { // async делает синхронный код. Вместе с await. не блокирует код подобие синхронного кода
-    const result = await fetch(url);
-    // поскольку fetch не выдаёт ошибки и reject надо проверить на ошибки
-    if (!result.ok) {
-        throw new Error(`Could not fetch ${url}, status: ${result.status}`);
-    }
+async function getResource(url = "./db.json") {
+  const result = await fetch(url);
+  if (!result.ok) {
+    throw new Error(`Could not fetch ${url}, status: ${result.status}`);
+  }
 
-    return result.json();
+  return await result.json();
 }
 
-export {postData};
-export {getResource};
+export const checkIfJSONServerOn = (fn, noJSONServer) => {
+  const http = require("http");
+
+  const options = {
+    hostname: "localhost",
+    port: 3000,
+    path: "/",
+    method: "GET",
+  };
+
+  const req = http.request(options, (res) => {
+    if (res.statusCode === 200) {
+      fn();
+    }
+  });
+
+  req.on("error", (error) => {
+    noJSONServer();
+  });
+
+  req.end();
+};
+
+export { postData };
+export { getResource };
