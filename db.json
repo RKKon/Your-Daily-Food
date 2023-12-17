@@ -1,6 +1,5 @@
 {
-  "menu": [
-    {
+  "menu": [{
       "img": "assets/img/tabs/vegy.jpg",
       "altimg": "vegy",
       "title": "Меню 'Фитнес'",
@@ -22,8 +21,7 @@
       "price": 21
     }
   ],
-  "requests": [
-    {
+  "requests": [{
       "name": "Andrei Subach",
       "phone": "+7 (619) 519-97-03",
       "id": 1
@@ -42,41 +40,6 @@
       "name": "Thor",
       "phone": "+7 (122) 222-22-22",
       "id": 4
-    },
-    {
-      "name": "Andrei Subach",
-      "phone": "+7 (444) 444-44-44",
-      "id": 5
-    },
-    {
-      "name": "RKKon",
-      "phone": "+7 (619) 519-97-03",
-      "id": 6
-    },
-    {
-      "name": "Andrei Subach",
-      "phone": "+7 (111) 111-11-11",
-      "id": 7
-    },
-    {
-      "name": "RKKon",
-      "phone": "+7 (111) 111-11-11",
-      "id": 8
-    },
-    {
-      "name": "asdasd",
-      "phone": "+7 (121) 212-12-12",
-      "id": 9
-    },
-    {
-      "name": "Andrei Subach",
-      "phone": "+7 (122) 222-22-22",
-      "id": 10
-    },
-    {
-      "name": "Andrei Subach",
-      "phone": "+7 (444) 444-44-44",
-      "id": 11
     }
   ]
 }

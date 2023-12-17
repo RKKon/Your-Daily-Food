@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
   tabs(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
   modal(".modal", timerOpenContactForm);
   form("form", timerOpenContactForm);
-  timer(".timer", "2023-12-21");
+  timer(".timer", "2024-02-21");
   cards();
   calc();
   slider({

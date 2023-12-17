@@ -15,11 +15,11 @@ function cards() {
       this.parent = document.querySelector(parentWrapper);
       this.classes = classes; // if() check нужно проверять length, тут масив
       this.transfer = 27; // курс 1$ к гривнам
-      this.changeToUAH();
+      // this.changeToUAH();
     }
-    changeToUAH() {
-      this.price = +this.price * this.transfer;
-    }
+    // changeToUAH() {
+    //   this.price = +this.price * this.transfer;
+    // }
     render() {
       const element = document.createElement("div");
       if (this.classes.length === 0) {
@@ -36,7 +36,7 @@ function cards() {
                 <div class="menu__item-divider"></div>
                 <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                    <div class="menu__item-total"><span>${this.price}</span> $/day</div>
                 </div>
             `;
       this.parent.append(element); //создаёт элемент на странице
