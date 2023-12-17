@@ -8686,7 +8686,7 @@ window.addEventListener("DOMContentLoaded", () => {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])(".modal", timerOpenContactForm);
   Object(_modules_form__WEBPACK_IMPORTED_MODULE_2__["default"])("form", timerOpenContactForm);
-  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_3__["default"])(".timer", "2023-12-21");
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_3__["default"])(".timer", "2024-02-21");
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])({
@@ -8713,46 +8713,46 @@ window.addEventListener("DOMContentLoaded", () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function calc() {
-  const resultCalculating = document.body.querySelector('.calculating__result span');
+  const resultCalculating = document.body.querySelector(".calculating__result span");
   let gender, height, weight, age, ratio;
 
   //Local storage
-  if (localStorage.getItem('gender')) {
-    gender = localStorage.getItem('gender');
+  if (localStorage.getItem("gender")) {
+    gender = localStorage.getItem("gender");
   } else {
-    gender = 'female';
-    localStorage.setItem('gender', 'female');
+    gender = "female";
+    localStorage.setItem("gender", "female");
   }
-  if (localStorage.getItem('ratio')) {
-    ratio = localStorage.getItem('ratio');
+  if (localStorage.getItem("ratio")) {
+    ratio = localStorage.getItem("ratio");
   } else {
     ratio = 1.375;
-    localStorage.setItem('ratio', 1.375);
+    localStorage.setItem("ratio", 1.375);
   }
   function initLocalSettings(selector, activeClass) {
     const elements = document.querySelectorAll(selector);
     elements.forEach(elem => {
       elem.classList.remove(activeClass);
-      if (elem.getAttribute('id') === localStorage.getItem('gender')) {
+      if (elem.getAttribute("id") === localStorage.getItem("gender")) {
         elem.classList.add(activeClass);
       }
-      if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
+      if (elem.getAttribute("data-ratio") === localStorage.getItem("ratio")) {
         elem.classList.add(activeClass);
       }
     });
   }
-  initLocalSettings('#gender div', 'calculating__choose-item_active');
-  initLocalSettings('.calculating__choose_big div', 'calculating__choose-item_active');
+  initLocalSettings("#gender div", "calculating__choose-item_active");
+  initLocalSettings(".calculating__choose_big div", "calculating__choose-item_active");
 
   //Calc
   function calcTotal() {
     if (!gender || !height || !weight || !age || !ratio) {
-      resultCalculating.textContent = '____';
+      resultCalculating.textContent = "____";
       return;
     }
-    if (gender === 'female') {
+    if (gender === "female") {
       resultCalculating.textContent = ((447.6 + 9.2 * weight + 3.1 * height - 4.3 * age) * ratio).toFixed();
-    } else if (gender === 'male') {
+    } else if (gender === "male") {
       resultCalculating.textContent = ((88.36 + 13.4 * weight + 4.8 * height - 5.7 * age) * ratio).toFixed();
     }
   }
@@ -8760,13 +8760,13 @@ function calc() {
     const elements = document.querySelectorAll(selector); // буду получать все елементы
 
     elements.forEach(elem => {
-      elem.addEventListener('click', e => {
-        if (e.target.getAttribute('data-ratio')) {
-          ratio = +e.target.getAttribute('data-ratio');
-          localStorage.setItem('ratio', +e.target.getAttribute('data-ratio'));
+      elem.addEventListener("click", e => {
+        if (e.target.getAttribute("data-ratio")) {
+          ratio = +e.target.getAttribute("data-ratio");
+          localStorage.setItem("ratio", +e.target.getAttribute("data-ratio"));
         } else {
-          gender = e.target.getAttribute('id');
-          localStorage.setItem('gender', e.target.getAttribute('id'));
+          gender = e.target.getAttribute("id");
+          localStorage.setItem("gender", e.target.getAttribute("id"));
         }
         elements.forEach(elem => elem.classList.remove(activeClass));
         e.target.classList.add(activeClass);
@@ -8774,33 +8774,33 @@ function calc() {
       });
     });
   }
-  getStaticInformation('#gender div', 'calculating__choose-item_active');
-  getStaticInformation('.calculating__choose_big div', 'calculating__choose-item_active');
+  getStaticInformation("#gender div", "calculating__choose-item_active");
+  getStaticInformation(".calculating__choose_big div", "calculating__choose-item_active");
   function getDynamicInformation(selector) {
     const input = document.querySelector(selector);
-    input.addEventListener('input', () => {
+    input.addEventListener("input", () => {
       if (input.value.match(/\D/g)) {
-        input.style.border = '1px solid red';
+        input.style.border = "1px solid red";
       } else {
-        input.style.border = 'none';
+        input.style.border = "none";
       }
-      switch (input.getAttribute('id')) {
-        case 'height':
+      switch (input.getAttribute("id")) {
+        case "height":
           height = +input.value;
           break;
-        case 'weight':
+        case "weight":
           weight = +input.value;
           break;
-        case 'age':
+        case "age":
           age = +input.value;
           break;
       }
       calcTotal();
     });
   }
-  getDynamicInformation('#height');
-  getDynamicInformation('#weight');
-  getDynamicInformation('#age');
+  getDynamicInformation("#height");
+  getDynamicInformation("#weight");
+  getDynamicInformation("#age");
 }
 /* harmony default export */ __webpack_exports__["default"] = (calc);
 
@@ -8834,11 +8834,11 @@ function cards() {
       }
       this.classes = classes; // if() check нужно проверять length, тут масив
       this.transfer = 27; // курс 1$ к гривнам
-      this.changeToUAH();
+      // this.changeToUAH();
     }
-    changeToUAH() {
-      this.price = +this.price * this.transfer;
-    }
+    // changeToUAH() {
+    //   this.price = +this.price * this.transfer;
+    // }
     render() {
       const element = document.createElement("div");
       if (this.classes.length === 0) {
@@ -8856,7 +8856,7 @@ function cards() {
                 <div class="menu__item-divider"></div>
                 <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                    <div class="menu__item-total"><span>${this.price}</span> $/day</div>
                 </div>
             `;
       this.parent.append(element); //создаёт элемент на странице
