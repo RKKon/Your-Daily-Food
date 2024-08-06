@@ -87,7 +87,7 @@ function form(formSelector, timerOpenContactForm) {
       PrevModalDialog.classList.remove("hide_display");
       thanksModal.classList.remove("modal__dialog", "show_display");
       closeModal(".modal");
-    }, 4000);
+    }, 3000);
   }
 
   //fetch("http://localhost:3000/menu").then((data) => data.json());

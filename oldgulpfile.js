@@ -74,28 +74,15 @@ gulp.task("copy-db", () => {
 });
 
 gulp.task("styles", () => {
-  // Compile and output regular CSS
-  gulp.src("./src/assets/sass/**/*.+(sass|scss)")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(autoprefixer())
-    .pipe(gulp.dest("src/assets/css"))  // Update src folder
-    .pipe(gulp.dest(dist + "/assets/css"))  // Update dist folder
-    .pipe(browserSync.stream())
-    .on('end', () => { console.log("Regular CSS updated."); });
-
-  // Compile, minify, and output minified CSS
-  return gulp.src("./src/assets/sass/**/*.+(sass|scss)")
+  return gulp
+    .src("src/assets/sass/**/*.+(sass|scss)")
     .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(rename({ suffix: ".min" }))
+    .pipe(rename({ suffix: ".min", prefix: "" }))
     .pipe(autoprefixer())
     .pipe(cleanCSS({ compatibility: "ie8" }))
-    .pipe(gulp.dest("src/assets/css"))  // Update src folder
-    .pipe(gulp.dest(dist + "/assets/css"))  // Update dist folder
-    .pipe(browserSync.stream())
-    .on('end', () => { console.log("Minified CSS updated."); });
+    .pipe(gulp.dest(dist + "/assets/css"))
+    .pipe(browserSync.stream());
 });
-
-
 
 gulp.task("watch", () => {
   browserSync.init({
@@ -107,7 +94,7 @@ gulp.task("watch", () => {
   gulp.watch("./src/index.html", gulp.parallel("copy-html"));
   gulp.watch("./db.json", gulp.parallel("copy-db"));
   gulp.watch("./src/assets/**/*.*", gulp.parallel("copy-assets"));
-  gulp.watch("./src/assets/sass/**/*.+(sass|scss)", gulp.parallel("styles"));
+  gulp.watch("./src/assets/css/**/*.*", gulp.parallel("styles"));
   gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
 });
 

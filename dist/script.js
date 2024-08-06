@@ -8682,11 +8682,11 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener("DOMContentLoaded", () => {
   //show Modal in some time.  //стрелочная функция позваляет не вызыватся при создании
-  const timerOpenContactForm = setTimeout(() => Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["openContactForm"])(".modal", timerOpenContactForm), 150000);
+  const timerOpenContactForm = setTimeout(() => Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["openContactForm"])(".modal", timerOpenContactForm), 15000);
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])(".modal", timerOpenContactForm);
   Object(_modules_form__WEBPACK_IMPORTED_MODULE_2__["default"])("form", timerOpenContactForm);
-  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_3__["default"])(".timer", "2024-02-21");
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_3__["default"])(".timer", "2024-12-21");
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])({
@@ -8848,7 +8848,6 @@ function cards() {
       } else {
         this.classes.forEach(className => element.classList.add(className)); // дабавляем классы в new items
       }
-
       element.innerHTML += `
                 <img src="${this.img}" alt="${this.alt}">
                 <h3 class="menu__item-subtitle">${this.title}</h3>
@@ -8911,7 +8910,6 @@ function cards() {
   //     });
   // }
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (cards);
 
 /***/ }),
@@ -8972,7 +8970,6 @@ function form(formSelector, timerOpenContactForm) {
           form.reset(); // альтернатива перебрать и очистить input value
         });
       };
-
       const noJSONServer = () => {
         const randomID = Math.floor(Math.random() * (1000 - 10 + 1)) + 10;
         const showResult = JSON.parse(json);
@@ -9005,13 +9002,12 @@ function form(formSelector, timerOpenContactForm) {
       PrevModalDialog.classList.remove("hide_display");
       thanksModal.classList.remove("modal__dialog", "show_display");
       Object(_modal__WEBPACK_IMPORTED_MODULE_0__["closeModal"])(".modal");
-    }, 4000);
+    }, 3000);
   }
 
   //fetch("http://localhost:3000/menu").then((data) => data.json());
   //.then(result => console.log(result));
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (form);
 
 /***/ }),
@@ -9032,7 +9028,6 @@ function closeModal(modalSelector) {
   modalContact.classList.remove("show_display");
   document.body.style.overflow = ""; // возврат прокрутки страницы
 }
-
 function openContactForm(modalSelector, timerOpenContactForm) {
   const modalContact = document.body.querySelector(modalSelector);
   modalContact.classList.add("show_display");
@@ -9175,7 +9170,6 @@ function slider(_ref) {
     } else {
       offset += delLettersAndSpaces(widthSlide); // смещает слайд на определеную величину(650)
     }
-
     slidesField.style.transform = `translateX(-${offset}px)`; //в CSS если сдвинуть влево то отрицательно значение, если вправо то положительное
 
     if (slideIndex == slides.length) {
@@ -9192,7 +9186,6 @@ function slider(_ref) {
     } else {
       offset -= delLettersAndSpaces(widthSlide); // смещает слайд на определеную величину(500)
     }
-
     slidesField.style.transform = `translateX(-${offset}px)`; //в CSS если сдвинуть влево то отрицательно значение, если вправо то положительное
 
     if (slideIndex == 1) {
@@ -9295,7 +9288,6 @@ function slider(_ref) {
       }
   }); */
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (slider);
 
 /***/ }),
@@ -9320,7 +9312,6 @@ function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, activeClass
       item.classList.remove('show_display', 'fade');
       // tabsFoodContent[i].getElementsByClassName.display = 'none';//вместо 2 выше(не рекомендуется)
     });
-
     foodItemInMenu.forEach(item => {
       item.classList.remove(activeClass); // убирает класс активности
     });

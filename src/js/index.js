@@ -13,13 +13,13 @@ window.addEventListener("DOMContentLoaded", () => {
   //show Modal in some time.  //стрелочная функция позваляет не вызыватся при создании
   const timerOpenContactForm = setTimeout(
     () => openContactForm(".modal", timerOpenContactForm),
-    150000,
+    15000,
   );
 
   tabs(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
   modal(".modal", timerOpenContactForm);
   form("form", timerOpenContactForm);
-  timer(".timer", "2024-02-21");
+  timer(".timer", "2024-12-21");
   cards();
   calc();
   slider({
