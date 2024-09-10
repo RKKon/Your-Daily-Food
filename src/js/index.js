@@ -7,18 +7,14 @@ import timer from "./modules/timer";
 import cards from "./modules/cards";
 import calc from "./modules/calc";
 import slider from "./modules/slider";
-import { openContactForm } from "./modules/modal";
+import timerOpenContactForm from "./modules/timerOpenContactForm";
 
 window.addEventListener("DOMContentLoaded", () => {
-  //show Modal in some time.  //стрелочная функция позваляет не вызыватся при создании
-  const timerOpenContactForm = setTimeout(
-    () => openContactForm(".modal", timerOpenContactForm),
-    15000,
-  );
-
+  timerOpenContactForm();
   tabs(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
-  modal(".modal", timerOpenContactForm);
-  form("form", timerOpenContactForm);
+  modal(".modal");
+  modal('.modal__delivery');
+  form("form");
   timer(".timer", "2024-12-21");
   cards();
   calc();

@@ -8670,6 +8670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_timerOpenContactForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/timerOpenContactForm */ "./src/js/modules/timerOpenContactForm.js");
 
 
 
@@ -8681,11 +8682,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.addEventListener("DOMContentLoaded", () => {
-  //show Modal in some time.  //стрелочная функция позваляет не вызыватся при создании
-  const timerOpenContactForm = setTimeout(() => Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["openContactForm"])(".modal", timerOpenContactForm), 15000);
+  Object(_modules_timerOpenContactForm__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])(".modal", timerOpenContactForm);
-  Object(_modules_form__WEBPACK_IMPORTED_MODULE_2__["default"])("form", timerOpenContactForm);
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])(".modal");
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])('.modal__delivery');
+  Object(_modules_form__WEBPACK_IMPORTED_MODULE_2__["default"])("form");
   Object(_modules_timer__WEBPACK_IMPORTED_MODULE_3__["default"])(".timer", "2024-12-21");
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
@@ -9025,15 +9026,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openContactForm", function() { return openContactForm; });
 function closeModal(modalSelector) {
   const modalContact = document.body.querySelector(modalSelector);
-  modalContact.classList.remove("show_display");
-  document.body.style.overflow = ""; // возврат прокрутки страницы
+  if (modalContact) {
+    modalContact.classList.remove("show_display");
+    document.body.style.overflow = ""; // возврат прокрутки страницы
+  }
 }
 function openContactForm(modalSelector, timerOpenContactForm) {
   const modalContact = document.body.querySelector(modalSelector);
-  modalContact.classList.add("show_display");
-  document.body.style.overflow = "hidden"; // убирает прокрутку страницы
-  if (timerOpenContactForm) {
-    clearInterval(timerOpenContactForm);
+  if (modalContact) {
+    modalContact.classList.add("show_display");
+    document.body.style.overflow = "hidden"; // убирает прокрутку страницы
+    if (timerOpenContactForm) {
+      clearInterval(timerOpenContactForm);
+    }
   }
 }
 function modal(modalSelector, timerOpenContactForm) {
@@ -9042,9 +9047,12 @@ function modal(modalSelector, timerOpenContactForm) {
   const middleContactBtn = document.body.querySelector(".offer__action .btn_dark");
   //const modalClose = modalContact.querySelector('[modal-close]');//deleted for use data=attribute in modalContact.addEventL .getElementsByClassName('modal__close')[0]; или querySelector('.modal .modal__close');
 
-  // for close Modal
+  if (!modalContact) {
+    console.error(`No element found for selector: ${modalSelector}`);
+    return;
+  }
 
-  //modalClose.addEventListener('click', closeModal);//turn off button and changed. It no need
+  // for close Modal
   modalContact.addEventListener("click", e => {
     // для закрытия стр не на крестик
     if (e.target === modalContact || e.target.getAttribute("modal-close") == "") {
@@ -9057,31 +9065,59 @@ function modal(modalSelector, timerOpenContactForm) {
       closeModal(modalSelector); // && и дальше использует Esc только если модал открыта
     }
   });
-  // End Close Modal
 
   // show Modal
   function showContactFormByClickBtn(btn) {
+    let modalSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.modal';
     btn.addEventListener("click", e => {
       e.preventDefault();
       openContactForm(modalSelector, timerOpenContactForm);
     });
+    // if modal is not ".modal"
+    const btnDelivery = document.querySelector('.btn__delivery');
+    btnDelivery.addEventListener('click', e => {
+      let input = document.querySelector('.input_delivery');
+      if (input.value.length >= 7) {
+        modalContact.classList.remove("show_display");
+        document.body.style.overflow = ""; // возврат прокрутки страницы
+      }
+    });
   }
   showContactFormByClickBtn(topContactBtn);
   showContactFormByClickBtn(middleContactBtn);
+  showContactFormByClickBtn(document.querySelector('.delivery__btn'), '.modal__delivery');
+  function showDeliveryForm(btn) {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      openContactForm('.modal__delivery', timerOpenContactForm);
+    });
+    document.querySelector('.modal__delivery').addEventListener("click", e => {
+      // для закрытия стр не на крестик
+      if (e.target === modalContact || e.target.getAttribute("modal-close") == "") {
+        closeModal('.modal__delivery');
+      }
+    });
+    document.addEventListener("keydown", e => {
+      // для закрыя модал на Esc
+      if (e.code === "Escape" && document.querySelector('.modal__delivery').classList.contains("show_display")) {
+        closeModal('.modal__delivery'); // && и дальше использует Esc только если модал открыта
+      }
+    });
+  }
+  showDeliveryForm(document.querySelector('.delivery__btn'));
 
   // show Modal at end of Page
   function showContactFormAtEndPage() {
-    if (document.documentElement.scrollTop >=
-    // баг мониторов нужно добавлять высоту клиенто а то не покажет
-    document.documentElement.scrollHeight - (document.documentElement.clientHeight + 1)) {
-      openContactForm(modalSelector, timerOpenContactForm);
+    if (document.documentElement.scrollTop >= document.documentElement.scrollHeight - (document.documentElement.clientHeight + 1)) {
+      if (!document.querySelector(".modal.show_display") && !document.querySelector(".modal__delivery.show_display")) {
+        openContactForm(modalSelector, timerOpenContactForm);
+      }
       window.removeEventListener("scroll", showContactFormAtEndPage);
     }
   }
   window.addEventListener("scroll", showContactFormAtEndPage);
 }
 /* harmony default export */ __webpack_exports__["default"] = (modal);
-// export { closeModal, openContactForm };
 
 /***/ }),
 
@@ -9411,6 +9447,38 @@ function timer(id, deadline) {
   setClock(id, deadline);
 }
 /* harmony default export */ __webpack_exports__["default"] = (timer);
+
+/***/ }),
+
+/***/ "./src/js/modules/timerOpenContactForm.js":
+/*!************************************************!*\
+  !*** ./src/js/modules/timerOpenContactForm.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ "./src/js/modules/modal.js");
+
+
+
+const timerOpenContactForm = () => {
+  let modalOpened = false;
+  const checkInterval = setInterval(() => {
+    if (document.querySelector(".modal.show_display") || document.querySelector(".modal__delivery.show_display")) {
+      modalOpened = true;
+      clearInterval(checkInterval); // Stop checking if any modal is already open
+    }
+  }, 1000);
+  const timerOpenContactForm = setTimeout(() => {
+    clearInterval(checkInterval); // Stop interval when timer triggers
+    if (!modalOpened) {
+      Object(_modal__WEBPACK_IMPORTED_MODULE_0__["openContactForm"])(".modal", null);
+    }
+  }, 15000);
+};
+/* harmony default export */ __webpack_exports__["default"] = (timerOpenContactForm);
 
 /***/ }),
 
